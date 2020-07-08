@@ -1,0 +1,51 @@
+version: '3'
+
+networks:
+  lms-network:
+
+services:
+  literary-map-server:
+    container_name: literary-map-server
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: literary-map-server
+    environment:
+      ZIPLOCATION: /data/results/
+      MONGO-DB-HOST: mongo-db
+    networks:
+      - lms-network
+    ports:
+      - 8080:8080
+    restart: on-failure
+    volumes:
+    - ./backend/src/main/resources/results/:/data/results/
+    depends_on:
+      - mongo-db
+  mongo-db:
+    container_name: mongo-db
+    image: mongo
+    networks:
+      - lms-network
+    ports:
+      - 27017:27017
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: lmsdb
+      MONGO_INITDB_ROOT_USERNAME: user1
+      MONGO_INITDB_ROOT_PASSWORD: secretpassword
+    volumes:
+      - ./backend/src/main/resources/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  literary-map-client:
+    container_name: literary-map-client
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/:/app
+      - /app/node_modules
+    ports:
+      - 8081:8080
+    networks:
+      - lms-network
