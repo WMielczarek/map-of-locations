@@ -34,5 +34,8 @@ CONTAINER ID        IMAGE                 COMMAND                  CREATED      
 ## Use nominatim container
 Nominatim API has restriction in numbers of request send in one second. To avoid ban on nominatim API, use nominatim container.
 
-## Application look
+## Application demo
+If you want to embed images, this is how you do it:
+
+![Image of Yaktocat](https://github.com/WMielczarek/map-of-locations/blob/master/jpgs/Analyze.png)
 
