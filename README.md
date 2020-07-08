@@ -1,4 +1,8 @@
-# Literary Map Server
+# Literary Map 
+Application alows users draw location on map found in text. 
+Application finds location in text using ws.clarin.pl API. 
+Also using nominatim API to find GeoJSON of found locations.
+
 
 ##Prerequisites
 Installed 
@@ -7,6 +11,8 @@ Installed
 * docker-compose
 * mvn 
 * Java 11 as default Java version
+* Vue
+* Vue materials
 
 with access from CommandLine (Windows) / Terminal (Linux)
 
@@ -25,3 +31,8 @@ CONTAINER ID        IMAGE                 COMMAND                  CREATED      
 
 
 ```
+## Use nominatim container
+Nominatim API has restriction in numbers of request send in one second. To avoid ban on nominatim API, use nominatim container.
+
+## Application look
+
